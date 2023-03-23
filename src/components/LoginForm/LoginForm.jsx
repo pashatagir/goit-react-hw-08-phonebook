@@ -1,10 +1,20 @@
-import { Form, Label } from '../RegisterForm/RegisterForm.styled';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/authOperations';
-import { Button, Input } from 'components/Phonebook';
+import {
+  Button,
+  Input,
+  InputGroup,
+  InputRightElement,
+  FormLabel,
+} from '@chakra-ui/react';
+import { useState } from 'react';
+import { Form } from '../Style/Style.styled';
+import { BtnSubmitAuth } from 'components/Buttons/Buttons';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -20,15 +30,50 @@ export const LoginForm = () => {
 
   return (
     <Form onSubmit={handleSubmit} autoComplete="off">
-      <Label>
+      <FormLabel>
         Email
-        <Input type="email" name="email" />
-      </Label>
-      <Label>
+        <Input
+          w="320px"
+          size="sm"
+          variant="filled"
+          borderRadius="8px"
+          focusBorderColor="teal.500"
+          type="email"
+          name="email"
+          placeholder="Enter email"
+        />
+      </FormLabel>
+      <FormLabel>
         Password
-        <Input type="password" name="password" />
-      </Label>
-      <Button type="submit">Log In</Button>
+        <InputGroup>
+          <Input
+            w="320px"
+            size="sm"
+            variant="filled"
+            borderRadius="8px"
+            focusBorderColor="teal.500"
+            type={show ? 'text' : 'password'}
+            name="password"
+            placeholder="Enter password"
+          />
+          <InputRightElement
+            h="16px"
+            top="50%"
+            transform="translateY(-50%)"
+            right="3px"
+          >
+            <Button
+              h="1.5rem"
+              colorScheme="teal"
+              size="sm"
+              onClick={handleClick}
+            >
+              {show ? 'Hide' : 'Show'}
+            </Button>
+          </InputRightElement>
+        </InputGroup>
+      </FormLabel>
+      <BtnSubmitAuth>Log In</BtnSubmitAuth>
     </Form>
   );
 };

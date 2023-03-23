@@ -1,5 +1,6 @@
 import { useAuth } from '../hooks';
-import { Navlink } from '../AuthNav/AuthNav.styled';
+import { BtnToggleTheme } from 'components/Buttons/Buttons';
+import { Navlink } from 'components/Style/Style.styled';
 
 export const Navigation = () => {
   const { isLoggedIn } = useAuth();
@@ -8,6 +9,7 @@ export const Navigation = () => {
     <nav>
       <Navlink to="/">Home</Navlink>
       {isLoggedIn && <Navlink to="/contacts">Contacts</Navlink>}
+      <BtnToggleTheme />
     </nav>
   );
 };

@@ -1,10 +1,20 @@
-import { Button, Input } from 'components/Phonebook';
+import {
+  Input,
+  Button,
+  InputGroup,
+  InputRightElement,
+  FormLabel,
+} from '@chakra-ui/react';
+import { BtnSubmitAuth } from 'components/Buttons/Buttons';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/authOperations';
-import { Form, Label } from './RegisterForm.styled';
+import { Form } from '../Style/Style.styled';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -21,19 +31,64 @@ export const RegisterForm = () => {
 
   return (
     <Form onSubmit={handleSubmit} autoComplete="off">
-      <Label>
+      <FormLabel>
         Username
-        <Input type="text" name="name" />
-      </Label>
-      <Label>
+        <Input
+          w="320px"
+          size="sm"
+          variant="filled"
+          borderRadius="8px"
+          focusBorderColor="teal.500"
+          type="text"
+          name="name"
+          placeholder="Enter name"
+        />
+      </FormLabel>
+      <FormLabel>
         Email
-        <Input type="email" name="email" />
-      </Label>
-      <Label>
+        <Input
+          w="320px"
+          size="sm"
+          variant="filled"
+          borderRadius="8px"
+          focusBorderColor="teal.500"
+          type="email"
+          name="email"
+          placeholder="Enter email"
+        />
+      </FormLabel>
+
+      <FormLabel>
         Password
-        <Input type="password" name="password" />
-      </Label>
-      <Button type="submit">Register</Button>
+        <InputGroup>
+          <Input
+            w="320px"
+            size="sm"
+            variant="filled"
+            borderRadius="8px"
+            focusBorderColor="teal.500"
+            type={show ? 'text' : 'password'}
+            name="password"
+            placeholder="Enter password"
+          />
+          <InputRightElement
+            h="16px"
+            top="50%"
+            transform="translateY(-50%)"
+            right="3px"
+          >
+            <Button
+              h="1.5rem"
+              colorScheme="teal"
+              size="sm"
+              onClick={handleClick}
+            >
+              {show ? 'Hide' : 'Show'}
+            </Button>
+          </InputRightElement>
+        </InputGroup>
+      </FormLabel>
+      <BtnSubmitAuth>Register</BtnSubmitAuth>
     </Form>
   );
 };

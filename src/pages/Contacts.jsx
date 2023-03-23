@@ -8,9 +8,9 @@ import {
 } from 'redux/contacts/selectors';
 import Phonebook from 'components/Phonebook';
 import ContactsList from 'components/ContactsList';
-import { Container } from 'components/App/App.styled';
 import Section from 'components/Section';
 import Filter from 'components/Filter';
+import { ContainerContacts } from 'components/Style/Style.styled';
 
 const Contacts = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const Contacts = () => {
   }, [dispatch]);
 
   return (
-    <Container>
+    <ContainerContacts>
       <Section title="Phonebook">
         <Phonebook />
       </Section>
@@ -36,7 +36,7 @@ const Contacts = () => {
       ) : (
         <b>Your phonebook is currently empty</b>
       )}
-    </Container>
+    </ContainerContacts>
   );
 };
 
